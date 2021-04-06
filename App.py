@@ -1,10 +1,21 @@
 from flask import Flask, render_template, request
 import csv
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def homepage():
     return render_template("index.html")
+
+
+def write_to_text(data):
+    with open('database.txt', 'a') as db:
+        print(db)
+        email = data['email']
+        sub = data['subject']
+        msg = data['message']
+        db.write(f'\n{email},{sub},{msg}')
 
 
 def write_to_csv(data):
